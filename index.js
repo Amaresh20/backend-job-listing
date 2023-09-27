@@ -9,10 +9,23 @@ app.use(bodyParser.urlencoded({extended:false}))
 app.use(express.static('./public'))
 
 app.set('view engine','ejs')
+const User=mongoose.model('User',{
+   name:String,
+   email:String,
+   mobile:String,
+   password:String
+})
 app.get('/',(req,res)=>{
    res.json({
     status:'All good!!'
    })
+})
+app.get('/health',(req,res)=>{
+     res.json({
+      service:'job-listing-server',
+      status:'active',
+      time:new Date()
+     })
 })
 app.listen(process.env.PORT,()=>{
      mongoose.connect(process.env.MONGODB_URL)
